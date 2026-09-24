@@ -43,8 +43,8 @@ base: '/lp/senior-free'
 
 ## Basic認証（ステージング）
 
-- ID: `konokoe`
-- PASS: `otta`
+- ID: `otta`
+- PASS: `konokoe`
 - Cloudflare Workers の Settings → Variables and Secrets に `BASIC_AUTH_USER` / `BASIC_AUTH_PASS` として登録する。
 
 ## アナリティクス実装ルール

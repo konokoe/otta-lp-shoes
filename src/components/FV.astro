@@ -114,18 +114,19 @@ const features = [
   }
 
   .fv__lead {
-    margin-top: clamp(0.75rem, 4cqw, 2rem);
+    margin-top: clamp(0.75rem, 3.6cqw, 1.75rem);
     /* カンプは約 14px だが、本文の下限 --fs-m に合わせる */
     font-size: clamp(1rem, 4.1cqw, 1.5rem);
     font-weight: 500;
-    line-height: 1.85;
+    line-height: 1.75;
     letter-spacing: 0.02em;
   }
 
   /* ハチの巣状のソール（説明文の下に続けて置く） */
   .fv__sole {
-    width: clamp(7.5rem, 32.6cqw, 15.5rem);
-    margin: clamp(1rem, 5.6cqw, 2.75rem) 0 0;
+    /* SP は靴のつま先に重ならない大きさに抑える */
+    width: clamp(7rem, 29cqw, 14rem);
+    margin: clamp(1rem, 4.1cqw, 2rem) 0 0;
   }
 
   .fv__sole-label {
@@ -153,6 +154,17 @@ const features = [
   @media (min-width: 1400px) {
     .fv__copy {
       top: clamp(5rem, 12cqw, 6rem);
+    }
+
+    /* PC は縦に余裕があるので、余白・行間・ソールを広めに取る */
+    .fv__lead {
+      margin-top: clamp(0.75rem, 4cqw, 2rem);
+      line-height: 1.85;
+    }
+
+    .fv__sole {
+      width: clamp(7.5rem, 32.6cqw, 15.5rem);
+      margin-top: clamp(1rem, 5.6cqw, 2.75rem);
     }
   }
 

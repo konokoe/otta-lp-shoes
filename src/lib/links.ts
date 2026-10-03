@@ -10,3 +10,6 @@ export const AMAZON_URL =
 
 /** LINE 公式アカウントの友だち追加 URL（未支給。支給され次第差し替える） */
 export const LINE_URL = '#';
+
+/** 見守りスポットのマップ */
+export const SPOT_MAP_URL = 'https://www.otta.me/map/detail/';

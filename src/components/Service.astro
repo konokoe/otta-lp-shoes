@@ -1,0 +1,314 @@
+---
+import { Image } from 'astro:assets';
+import ArrowIcon from './icon/ArrowIcon.astro';
+import { en } from '../lib/en';
+import { SPOT_MAP_URL } from '../lib/links';
+import logoImg from '../assets/logo-otta.svg';
+import decoImg from '../assets/section06-deco.png';
+import arrowImg from '../assets/section06-deco02.png';
+import mapImg from '../assets/section011-item-02.png';
+import illustImg from '../assets/section06-image.png';
+
+/** 位置が記録される仕組み。small は小さく組む補足（英数字を含まないので en() は通さない） */
+const steps = [
+  { text: '見守られる高齢者は、見守り端末内蔵のハンズフリーシューズを履いて歩くだけ。' },
+  { text: '駅やコンビニなど街中に設置された見守りスポットを通過する時に位置が記録されます。<br />必要に応じて通知設定をすることが出来ます。' },
+  {
+    text: '見守りアプリをインストールしたスマホを持つ人<small>（見守り人）</small>とすれ違う時の位置が記録されます。',
+    note: '※見守り人にはすれ違ったことは通知されません。',
+  },
+  { text: '見守りタクシーとすれ違う時の位置が記録されます。' },
+  { text: '専用アプリにてお子様の行動履歴を地図で確認することができます。<small>（有料サービスのみ）</small>' },
+];
+---
+
+<section class="service">
+  <div class="service__inner">
+    <h2 class="service__title">
+      <Image src={logoImg} alt="otta" class="service__logo" />
+      <span class="service__title-text">見守りサービス<small>って？</small></span>
+      <Image src={decoImg} alt="" class="service__title-deco" />
+    </h2>
+    <Image src={arrowImg} alt="" class="service__arrow" />
+
+    <!-- 語の途中で折り返さないよう、改行してよい位置だけ <wbr> で示す -->
+    <p class="service__catch"><span class="en">IoT</span>テクノロジーを活用し、<wbr />地域全体で<wbr />高齢者の安全を守る<wbr />新しい形の<wbr />「見守り」サービスを<wbr />提供しています。</p>
+
+    <p class="service__text" set:html={en('株式会社ottaは見守り事業を展開して10年。54自治体、延べ20万人が利用しています。端末を持つ児童が見守りスポットを通過したり、見守り人アプリをインストールした地域の方やタクシーとすれ違うことで、その位置情報を記録し、地域全体で子どもたちを見守ります。')} />
+
+    <div class="service__notes">
+      <p>※お住まいのエリアの見守りスポットを下記のマップでご確認の上、ご購入ください。</p>
+      <p>※見守りタクシー・見守り人はマップには反映されていません。</p>
+    </div>
+
+    <Image src={mapImg} alt="見守りスポットの地図（東京駅周辺の例）" class="service__map" format="avif" />
+
+    <p class="service__text">下のボタンから見守りスポットの場所を確認することができます。</p>
+
+    <a
+      href={SPOT_MAP_URL}
+      class="service__btn"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="見守りスポットを確認する（新しいタブで開きます）"
+    >
+      見守りスポットを確認する
+      <ArrowIcon fill="#FFFFFF" size={8} />
+    </a>
+
+    <ol class="service__steps">
+      {steps.map((step, i) => (
+        <li class="service__step">
+          <span class="service__step-no en">{i + 1}</span>
+          <div class="service__step-body">
+            <p set:html={step.text} />
+            {step.note && <p class="service__step-note">{step.note}</p>}
+          </div>
+        </li>
+      ))}
+    </ol>
+
+    <p class="service__spots">
+      <span class="service__spots-line">
+        <em>全国<span class="service__spots-num en">18</span>万箇所</em><small>の見守りスポットで</small>
+      </span>
+      <span class="service__spots-line service__spots-line--2">
+        広範囲の見守り<small>を</small>実現<span class="service__spots-tail">しています！</span>
+      </span>
+    </p>
+
+    <Image
+      src={illustImg}
+      alt="地域と連携した見守りサービスのイメージ。学校やお店などの見守りスポット、見守り人、見守りタクシーが高齢者の位置を記録します"
+      class="service__illust"
+      format="avif"
+      widths={[330, 660, 1006]}
+      sizes="(min-width: 768px) 630px, 82vw"
+    />
+  </div>
+</section>
+
+<style>
+  /* 位置・サイズはカンプ（390px 幅）の実測を cqw で比率指定する */
+  .service {
+    container-type: inline-size;
+    background-color: #FFFBE8;
+  }
+
+  .service__inner {
+    display: flex;
+    flex-direction: column;
+    padding: var(--section-pt) clamp(1.25rem, 5.7cqw, 2.75rem) var(--section-pt);
+    color: var(--c-text);
+  }
+
+  /* otta 見守りサービスって？ */
+  .service__title {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35em;
+    align-self: center;
+    font-size: clamp(1.25rem, 5.6cqw, 2.75rem);
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: 0.06em;
+    color: #434343;
+    white-space: nowrap;
+  }
+
+  .service__logo {
+    width: 3.2em;
+    height: auto;
+  }
+
+  .service__title-text small {
+    font-size: 0.82em;
+  }
+
+  .service__title-deco {
+    position: absolute;
+    top: -0.75em;
+    right: 0.6em;
+    width: 0.95em;
+    height: auto;
+  }
+
+  .service__arrow {
+    align-self: center;
+    width: clamp(6.5rem, 31cqw, 15rem);
+    height: auto;
+    margin-top: clamp(0.5rem, 3cqw, 1.5rem);
+  }
+
+  /* ピンクの囲み */
+  .service__catch {
+    margin-top: var(--content-gap);
+    padding: 0.9em 1.2em;
+    border-radius: clamp(0.625rem, 2.6cqw, 1.25rem);
+    background-color: #FFEBE0;
+    color: #FF6161;
+    font-size: var(--fs-m);
+    font-weight: 500;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+    line-height: 1.75;
+    letter-spacing: 0.06em;
+  }
+
+  .service__text {
+    margin-top: var(--content-gap);
+    font-size: var(--fs-m);
+    line-height: 1.9;
+    letter-spacing: 0.05em;
+    text-wrap: pretty;
+  }
+
+  .service__notes {
+    margin-top: 0.75em;
+    font-size: var(--fs-xs);
+    line-height: 1.7;
+    letter-spacing: 0.04em;
+    color: #424242;
+  }
+
+  .service__map {
+    width: 100%;
+    height: auto;
+    margin-top: var(--content-gap);
+  }
+
+  /* 見守りスポットを確認する */
+  .service__btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: clamp(3.25rem, 12cqw, 5.5rem);
+    margin-top: clamp(0.75rem, 3.6cqw, 1.75rem);
+    padding-inline: 2.5em;
+    border-radius: 9999px;
+    background-color: var(--c-red);
+    color: var(--c-g-000);
+    font-size: clamp(1rem, 4.6cqw, 2rem);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .service__btn:hover {
+    opacity: 0.85;
+  }
+
+  .service__btn :global(svg) {
+    position: absolute;
+    right: 1.4em;
+    top: 50%;
+    width: 0.5em;
+    height: auto;
+    transform: translateY(-50%);
+  }
+
+  /* 1〜5 の仕組み */
+  .service__steps {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1rem, 5cqw, 2.25rem);
+    margin-top: calc(var(--section-pt) * 1.5);
+  }
+
+  .service__step {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.75rem, 3.7cqw, 1.75rem);
+  }
+
+  .service__step-no {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(1.75rem, 6.4cqw, 3rem);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: #50B297;
+    color: #FFFBE8;
+    font-size: clamp(0.9375rem, 3.8cqw, 1.75rem);
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .service__step-body {
+    font-size: var(--fs-m);
+    line-height: 1.7;
+    letter-spacing: 0.05em;
+    color: #3C372D;
+    text-wrap: pretty;
+  }
+
+  .service__step-body :global(small) {
+    font-size: 0.85em;
+    white-space: nowrap;
+  }
+
+  .service__step-note {
+    margin-top: 0.25em;
+    font-size: var(--fs-xs);
+  }
+
+  /* 全国18万箇所の見守りスポットで 広範囲の見守りを実現しています！ */
+  .service__spots {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: clamp(1.5rem, 6cqw, 3rem);
+    color: #434343;
+    line-height: 1.25;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  .service__spots-line {
+    display: flex;
+    align-items: baseline;
+  }
+
+  .service__spots em {
+    font-style: normal;
+    font-size: clamp(1rem, 4.9cqw, 2.25rem);
+    color: #FF6161;
+  }
+
+  .service__spots-num {
+    margin-inline: 0.05em;
+    font-size: 2.7em;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .service__spots small {
+    font-size: clamp(0.8125rem, 3.8cqw, 1.75rem);
+  }
+
+  .service__spots-line--2 {
+    margin-top: 0.15em;
+    font-size: clamp(1.25rem, 6cqw, 2.75rem);
+  }
+
+  .service__spots-line--2 small {
+    font-size: 0.72em;
+  }
+
+  .service__spots-tail {
+    font-size: 0.85em;
+  }
+
+  .service__illust {
+    align-self: center;
+    width: 82%;
+    height: auto;
+    margin-top: clamp(1.5rem, 7.4cqw, 3.5rem);
+  }
+</style>

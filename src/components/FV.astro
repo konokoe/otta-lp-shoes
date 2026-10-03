@@ -1,6 +1,5 @@
 ---
 import { Image } from 'astro:assets';
-import CampaignBanner from './ui/CampaignBanner.astro';
 import { en } from '../lib/en';
 import mainImg from '../assets/fv-main.png';
 import subImg from '../assets/fv-sub.png';
@@ -70,13 +69,6 @@ const features = [
     </ul>
   </div>
 
-  <!-- 特徴のすぐ下に入れるセクション（導入実績など） -->
-  <slot />
-
-  <!-- キャンペーンバナー -->
-  <div class="fv__banner">
-    <CampaignBanner location="fv" />
-  </div>
 </section>
 
 <style>
@@ -235,12 +227,5 @@ const features = [
     font-size: clamp(0.8125rem, 3.5cqw, 1.25rem);
     line-height: 1.5;
     white-space: nowrap;
-  }
-
-  /* キャンペーンバナー */
-  .fv__banner {
-    position: relative;
-    background-color: var(--c-g-000);
-    padding-top: clamp(1.5rem, 10.3vw, 5rem);
   }
 </style>

@@ -4,6 +4,13 @@ import { LINE_URL } from '../lib/links';
 import bgImg from '../assets/section03-bg.png';
 import decoImg from '../assets/section03-deco.png';
 
+interface Props {
+  /** ナビのリンク先にする場合のみ指定（ページ内で重複させない） */
+  id?: string;
+}
+
+const { id } = Astro.props;
+
 /** 紙吹雪は背景として敷くので、CSS から参照できる URL を作っておく */
 const bg = await getImage({ src: bgImg, format: 'avif', width: 1200 });
 
@@ -11,7 +18,7 @@ const bg = await getImage({ src: bgImg, format: 'avif', width: 1200 });
 const isExternal = LINE_URL.startsWith('http');
 ---
 
-<section class="line-cta" style={`--line-cta-bg: url('${bg.src}')`}>
+<section class="line-cta" id={id} style={`--line-cta-bg: url('${bg.src}')`}>
   <div class="line-cta__card">
     <p class="line-cta__release">
       <span class="line-cta__date"><span class="line-cta__year en">2026</span><small>年</small>冬頃</span>

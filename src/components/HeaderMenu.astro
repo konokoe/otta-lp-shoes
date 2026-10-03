@@ -3,17 +3,9 @@ import { Image } from 'astro:assets';
 import logoSrc from '../assets/logo.svg';
 import ArrowIcon from './icon/ArrowIcon.astro';
 import { en } from '../lib/en';
+import { NAV_ITEMS } from '../lib/nav';
 
-const navItems = [
-  { label: '無料プランと有料プランの違い', href: '#plan-diff' },
-  { label: 'otta.aの3つのポイント',       href: '#points' },
-  { label: '見守りネットワーク',          href: '#network' },
-  { label: 'サービス利用の流れ',          href: '#flow' },
-  { label: '料金プラン',                  href: '#pricing' },
-  { label: 'GPSとの違い',                 href: '#product' },
-  { label: 'メディア掲載情報',            href: '#voices' },
-  { label: 'よくある質問',               href: '#faq' },
-];
+const navItems = NAV_ITEMS;
 ---
 
 <div class="menu-overlay" id="header-menu" aria-hidden="true" role="dialog" aria-modal="true" aria-label="メニュー">

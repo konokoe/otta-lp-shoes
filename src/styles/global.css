@@ -82,6 +82,17 @@
     margin-inline: auto;
   }
 
+  /* ナビからのジャンプ先が固定ヘッダーの下に潜らないようにする（PC はヘッダー非表示） */
+  main [id] {
+    scroll-margin-top: clamp(5.5rem, 24vw, 7rem);
+  }
+
+  @media (min-width: 1400px) {
+    main [id] {
+      scroll-margin-top: 0;
+    }
+  }
+
   /* 列の外に背景が見える幅では、白いセクションが背景に溶けないよう影で縁取る */
   @media (min-width: 769px) {
     .wrapper {

@@ -40,7 +40,15 @@ const features = [
 
     <figure class="fv__sole">
       <figcaption class="fv__sole-label">ハチの巣状のソール</figcaption>
-      <Image src={subImg} alt="" class="fv__sole-img" format="avif" />
+      <Image
+        src={subImg}
+        alt=""
+        class="fv__sole-img"
+        format="avif"
+        loading="eager"
+        widths={[127, 254, 381, 500]}
+        sizes="(min-width: 768px) 250px, 33vw"
+      />
     </figure>
   </div>
 
@@ -150,14 +158,8 @@ const features = [
       top: clamp(5rem, 12cqw, 6rem);
     }
 
-    /* ソール画像は元が 127px しかないので、拡大は粗さが目立たない程度に留める */
     .fv__sole {
       top: clamp(23.5rem, 53cqw, 26rem);
-      width: 170px;
-    }
-
-    .fv__sole-label {
-      font-size: var(--fs-s);
     }
   }
 

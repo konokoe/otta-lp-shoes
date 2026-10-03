@@ -1,5 +1,5 @@
 {
-  "name": "otta-lp-free",
+  "name": "otta-lp-shoes",
   "compatibility_date": "2025-06-04",
   "main": "./worker.ts",
   "assets": {
@@ -8,7 +8,7 @@
   },
   "routes": [
     {
-      "pattern": "otta-free.konokoe.design",
+      "pattern": "otta-shoes.konokoe.design",
       "custom_domain": true
     }
   ]

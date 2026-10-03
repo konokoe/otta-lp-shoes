@@ -1,4 +1,4 @@
-# otta-lp-free 案件設定
+# otta-lp-shoes 案件設定
 
 ## クライアント
 
@@ -7,21 +7,21 @@
 
 ## 訴求
 
-- **月々0円で始められる見守りサービス**（無料プラン推奨）
-- 商材は `otta.a`（otta-lp-outing と同一）。プラン訴求のみ差し替え。
+- **靴用の見守りサービス**（訴求内容は指示待ち）
+- 商材は `otta.a`。
 
 ## 公開情報
 
-- **公開URL:** https://www.otta.me/lp/senior-free/
-- **ステージング:** https://otta-free.konokoe.design/lp/senior-free/
-- **リポジトリ:** git@github.com:konokoe/otta-lp-free.git
+- **公開URL:** https://www.otta.me/lp/shoes/
+- **ステージング:** https://otta-shoes.konokoe.design/lp/shoes/
+- **リポジトリ:** git@github.com:konokoe/otta-lp-shoes.git
 
 ## Astro 設定
 
 ```js
 // astro.config.mjs
 site: 'https://www.otta.me'
-base: '/lp/senior-free'
+base: '/lp/shoes'
 ```
 
 ## ターゲット
@@ -31,7 +31,7 @@ base: '/lp/senior-free'
 
 ## 出自
 
-- `otta-lp-outing`（https://www.otta.me/lp/senior-outing/ ）を複製して作成。
+- `otta-lp-free`（https://www.otta.me/lp/senior-free/ ）を複製して作成（otta-lp-free 自体は `otta-lp-outing` の複製）。git 履歴は otta-lp-free から引き継いでいる。
 - デザイントークン・CSS設計ルール・既存コンポーネントはそのまま踏襲する。
 - **文言・原稿は指示があった箇所のみ変更する。自己判断でコピーを書き換えない。**
 - `design/` と `src/assets/` の旧アセットは流用の可能性があるため残置。
@@ -49,10 +49,10 @@ base: '/lp/senior-free'
 
 ## アナリティクス実装ルール
 
-- GTM ID: `GTM-N3FWBNNW`（otta-lp-outing と共通。計測の切り分けは Looker Studio 側で URL フィルターを掛ける）
+- GTM ID: `GTM-N3FWBNNW`（otta-lp-outing / otta-lp-free と共通。計測の切り分けは Looker Studio 側で URL フィルターを掛ける）
 - `BaseLayout.astro` 内でランタイムのホスト名チェックにより発火を制御する。
 - 発火するホスト: `www.otta.me`（本番）・`otta-me-stg.lolipop.io`（lolipopステージング）
-- ローカル・`otta-free.konokoe.design`（Cloudflare staging）では発火しない。
+- ローカル・`otta-shoes.konokoe.design`（Cloudflare staging）では発火しない。
 
 ## CSS 設計ルール
 

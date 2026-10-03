@@ -4,7 +4,7 @@ export interface Env {
   ASSETS: Fetcher;
 }
 
-const BASE_PATH = '/lp/senior-free';
+const BASE_PATH = '/lp/shoes';
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
@@ -26,7 +26,7 @@ export default {
       return unauthorized();
     }
 
-    // /lp/senior-free/* → /* にパスを書き換えて dist/ と一致させる
+    // /lp/shoes/* → /* にパスを書き換えて dist/ と一致させる
     const url = new URL(request.url);
     let assetPath = url.pathname;
 

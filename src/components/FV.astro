@@ -7,72 +7,59 @@ import subImg from '../assets/fv-sub.png';
 import item01 from '../assets/fv-items-01.png';
 import item02 from '../assets/fv-items-02.png';
 import item03 from '../assets/fv-items-03.png';
+import item04 from '../assets/fv-items-04.png';
+import item05 from '../assets/fv-items-05.png';
 
-/** 3つの理由カード。iconH はカンプ（375〜390px 幅）での実寸をもとにした clamp */
-const reasons = [
-  {
-    no: 1,
-    label: '始めやすい',
-    icon: item01,
-    iconH: 'clamp(3rem, 12.3vw, 6rem)',
-    lines: ['月額0円で', '始められる'],
-  },
-  {
-    no: 2,
-    label: '手間いらず',
-    icon: item02,
-    iconH: 'clamp(3.5rem, 14.4vw, 7rem)',
-    lines: ['約6年間、充電不要', '操作もいりません'],
-  },
-  {
-    no: 3,
-    label: '緩く見守る',
-    icon: item03,
-    iconH: 'clamp(3.75rem, 15.6vw, 7.5rem)',
-    lines: ['GPSと差別化された', '緩やかな見守り'],
-  },
+/** クッションスニーカーの特徴。上段3つ・下段2つで並べる */
+const features = [
+  { icon: item01, title: '軽量設計', text: '約250g' },
+  { icon: item02, title: '立体クッション', text: 'やさしくフィット' },
+  { icon: item03, title: '高いグリップ力', text: '滑りにくく安心' },
+  { icon: item04, title: '幅広設計', text: 'ゆったり快適' },
+  { icon: item05, title: '通気性に優れた', text: '快適な履き心地' },
 ];
 ---
 
 <section class="fv">
-  <!-- メインビジュアル -->
-  <h1 class="fv__visual">
+  <!-- メインビジュアル（写真の上にコピーを重ねる） -->
+  <div class="fv__visual">
     <Image
       src={mainImg}
-      alt="家族の安心を、そっと見守る。高齢者向け見守りサービス 月額0円から始められる"
+      alt=""
       class="fv__main"
       format="avif"
       loading="eager"
+      widths={[390, 780, 1065]}
+      sizes="(min-width: 768px) 768px, 100vw"
     />
-  </h1>
 
-  <!-- 3つの理由 -->
-  <div class="fv__reasons">
-    <h2 class="fv__reasons-title">
-      <span set:html={en('ottaならストレスなく続けられる！')} /><br class="br-sp" /><span set:html={en('3つの理由')} />
+    <div class="fv__copy">
+      <h1 class="fv__title">高齢者の「歩く」を、<br />やさしく見守る。</h1>
+      <p class="fv__lead">軽やかで優しい履き心地。<br />散歩や軽い運動など、<br />毎日の外出をもっと楽しく。</p>
+    </div>
+
+    <figure class="fv__sole">
+      <figcaption class="fv__sole-label">ハチの巣状のソール</figcaption>
+      <Image src={subImg} alt="" class="fv__sole-img" format="avif" />
+    </figure>
+  </div>
+
+  <!-- クッションスニーカーの特徴 -->
+  <div class="fv__features">
+    <h2 class="fv__features-title">
+      <span class="fv__features-en en">LAZY SHOES</span>
+      <span class="fv__features-ja">クッションスニーカーの特徴</span>
     </h2>
 
-    <div class="fv__reasons-body">
-      <ul class="fv__reason-list">
-        {reasons.map(reason => (
-          <li class="fv__reason">
-            <p class="fv__reason-label">
-              <span class="fv__reason-no en">{reason.no}</span>{reason.label}
-            </p>
-            <div class="fv__reason-icon">
-              <Image src={reason.icon} alt="" format="avif" style={`height:${reason.iconH}`} />
-            </div>
-            <p class="fv__reason-text">
-              {reason.lines.map(line => (
-                <span class="fv__reason-line" set:html={en(line)} />
-              ))}
-            </p>
-          </li>
-        ))}
-      </ul>
-
-      <Image src={subImg} alt="" class="fv__town" format="avif" />
-    </div>
+    <ul class="fv__feature-list">
+      {features.map(item => (
+        <li class="fv__feature">
+          <Image src={item.icon} alt="" class="fv__feature-icon" format="avif" />
+          <p class="fv__feature-title">{item.title}</p>
+          <p class="fv__feature-text" set:html={en(item.text)} />
+        </li>
+      ))}
+    </ul>
   </div>
 
   <!-- キャンペーンバナー -->
@@ -82,162 +69,144 @@ const reasons = [
 </section>
 
 <style>
+  /* 位置・サイズはカンプ（390px 幅）の実測を cqw で比率指定する。
+     PC はコンテナが --max-w で頭打ちになるので、cqw も一緒に止まる */
   .fv {
-    /* 固定ヘッダーの逃げ。カンプではメインビジュアル上端が 106px / 390px 幅 */
-    padding-top: clamp(6rem, 27.2vw, 7rem);
-    background-color: var(--c-cream);
+    container-type: inline-size;
+    background-color: var(--c-g-000);
   }
 
-  @media (min-width: 1400px) {
-    .fv {
-      padding-top: 4rem;
-    }
-  }
-
-  /* メインビジュアル */
+  /* メインビジュアル。固定ヘッダーの下まで写真を敷く */
   .fv__visual {
-    margin: 0;
+    position: relative;
   }
 
   .fv__main {
+    display: block;
     width: 100%;
     height: auto;
   }
 
-  /* 3つの理由 */
-  .fv__reasons-title {
-    margin-top: clamp(0.5rem, 2.6vw, 1.25rem);
-    margin-bottom: clamp(0.25rem, 1.5vw, 0.625rem);
-    /* メインビジュアルが全幅なので、このセクションには左右余白が無かった */
-    padding-inline: var(--section-px);
-    /* カンプ実測 20.5px / 390px 幅。上限は --fs-h2 と同じ 1.75rem */
-    font-size: clamp(1.125rem, 5.25vw, 1.75rem);
-    font-weight: 700;
-    line-height: 1.35;
-    letter-spacing: 0.05em;
-    text-align: center;
+  /* コピー */
+  .fv__copy {
+    position: absolute;
+    top: clamp(5rem, 26.5cqw, 13rem);
+    left: clamp(1rem, 6.2cqw, 3rem);
     color: var(--c-text);
   }
 
-  /* SP は「3つの理由」の前で改行する */
-  .br-sp {
-    display: block;
+  .fv__title {
+    font-size: clamp(1.375rem, 6.4cqw, 3rem);
+    font-weight: 700;
+    line-height: 1.45;
+    letter-spacing: 0.02em;
   }
 
-  @media (min-width: 769px) {
-    .br-sp {
-      display: none;
-    }
+  .fv__lead {
+    margin-top: clamp(0.375rem, 2cqw, 1rem);
+    /* カンプは約 14px だが、本文の下限 --fs-m に合わせる */
+    font-size: clamp(1rem, 4.1cqw, 1.5rem);
+    font-weight: 500;
+    line-height: 1.65;
+    letter-spacing: 0.02em;
   }
 
-  .fv__reasons-body {
-    position: relative;
-    /* 街並みイラストのうち、カード下端より下に見える分 */
-    padding-bottom: 8%;
-  }
-
-  /* 街並み（カードの背面に敷く） */
-  .fv__town {
+  /* ハチの巣状のソール */
+  .fv__sole {
     position: absolute;
-    left: 0;
-    bottom: 0;
-    z-index: 0;
-    width: 100%;
-    height: auto;
+    top: clamp(13.5rem, 72cqw, 35rem);
+    left: clamp(1rem, 5.6cqw, 2.75rem);
+    width: clamp(7.5rem, 32.6cqw, 15.5rem);
+    margin: 0;
   }
 
-  /* カード枠 */
-  .fv__reason-list {
+  .fv__sole-label {
     position: relative;
     z-index: 1;
-    margin-inline: clamp(0.75rem, 4.1vw, 2rem);
-    padding-block: clamp(0.75rem, 3.8vw, 1.5rem);
-    display: flex;
-    align-items: stretch;
-    border: 1px solid var(--c-green);
-    border-radius: 0.5rem;
-  }
-
-  .fv__reason {
-    /* ラベル・説明文の文字サイズ。カンプ（390px 幅）の 12px を基準に、
-       狭い端末でも「約6年間、充電不要」が1行に収まるよう幅追従させる */
-    --reason-fs: clamp(0.5rem, 2.8vw, 0.875rem);
-
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    /* コンテナは --max-w で頭打ちになるため、vw の余白も上限を設ける。
-       これがないと超広幅でラベルが折り返す */
-    padding-inline: min(1.5vw, 0.75rem);
-  }
-
-  /* 列の区切り（点線） */
-  .fv__reason + .fv__reason {
-    position: relative;
-  }
-
-  .fv__reason + .fv__reason::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.25rem;
-    bottom: 0.5rem;
-    border-left: 1px dotted var(--c-green);
-  }
-
-  /* ①始めやすい */
-  .fv__reason-label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5em;
-    font-size: var(--reason-fs);
-    line-height: 1.4;
-    color: var(--c-dark);
-  }
-
-  .fv__reason-no {
-    flex-shrink: 0;
-    width: 1.75em;
-    height: 1.75em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: max-content;
+    padding: 0.35em 1.1em;
+    border-radius: 9999px;
     background-color: var(--c-dark);
     color: var(--c-g-000);
-    font-weight: 700;
+    font-size: clamp(0.75rem, 3.2cqw, 1.375rem);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .fv__sole-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: -0.75em;
     border-radius: 50%;
   }
 
-  /* アイコン（3列で高さを揃え、上下中央に置く） */
-  .fv__reason-icon {
-    flex: 1;
+  /* 特徴の見出し帯 */
+  .fv__features-title {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding-top: clamp(0.5rem, 4vw, 1.25rem);
-    padding-bottom: clamp(0.25rem, 1.8vw, 0.75rem);
-  }
-
-  .fv__reason-icon :global(img) {
-    width: auto;
-    max-width: 100%;
-    object-fit: contain;
-  }
-
-  /* 説明文 */
-  .fv__reason-text {
-    font-size: var(--reason-fs);
-    line-height: 1.3;
-    letter-spacing: 0.02em;
+    gap: 0.25em;
+    padding-block: clamp(1rem, 4.6cqw, 2rem);
+    background-color: var(--c-dark);
+    color: var(--c-g-000);
     text-align: center;
-    color: var(--c-dark);
   }
 
-  /* 改行位置はカンプ通りに固定する */
-  .fv__reason-line {
-    display: block;
+  .fv__features-en {
+    font-size: clamp(1.5rem, 7.2cqw, 3rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 0.08em;
+  }
+
+  .fv__features-ja {
+    font-size: clamp(1.125rem, 5.1cqw, 2rem);
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+  }
+
+  /* 特徴の一覧（上段3・下段2）。罫線はセル同士の隙間で引く */
+  .fv__feature-list {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2px;
+    background-color: var(--c-dark);
+    border-bottom: 2px solid var(--c-dark);
+  }
+
+  .fv__feature {
+    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-block: clamp(1rem, 4.6cqw, 2rem);
+    background-color: var(--c-g-000);
+    color: var(--c-dark);
+    text-align: center;
+  }
+
+  .fv__feature:nth-child(n + 4) {
+    grid-column: span 3;
+  }
+
+  .fv__feature-icon {
+    width: clamp(2.5rem, 13cqw, 4.5rem);
+    height: auto;
+    margin-bottom: clamp(0.5rem, 2.6cqw, 1rem);
+  }
+
+  .fv__feature-title {
+    font-size: clamp(0.8125rem, 3.5cqw, 1.25rem);
+    font-weight: 700;
+    line-height: 1.5;
+    white-space: nowrap;
+  }
+
+  .fv__feature-text {
+    font-size: clamp(0.8125rem, 3.5cqw, 1.25rem);
+    line-height: 1.5;
     white-space: nowrap;
   }
 
@@ -246,11 +215,5 @@ const reasons = [
     position: relative;
     background-color: var(--c-g-000);
     padding-top: clamp(1.5rem, 10.3vw, 5rem);
-  }
-
-  @media (min-width: 1400px) {
-    .fv__reason {
-      --reason-fs: var(--fs-s);
-    }
   }
 </style>

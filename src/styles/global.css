@@ -82,6 +82,14 @@
     margin-inline: auto;
   }
 
+  /* 列の外に背景が見える幅では、白いセクションが背景に溶けないよう影で縁取る */
+  @media (min-width: 769px) {
+    .wrapper {
+      position: relative;
+      box-shadow: 0 0 24px rgba(39, 29, 17, 0.12);
+    }
+  }
+
   .pc-detail {
     display: none;
   }

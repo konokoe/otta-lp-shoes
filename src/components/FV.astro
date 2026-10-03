@@ -147,11 +147,17 @@ const features = [
   /* PC は固定ヘッダーが無い（左のナビに移る）ので、その分上に詰める */
   @media (min-width: 1400px) {
     .fv__copy {
-      top: clamp(2.5rem, 7cqw, 3.5rem);
+      top: clamp(5rem, 12cqw, 6rem);
     }
 
+    /* ソール画像は元が 127px しかないので、それ以上に拡大しない */
     .fv__sole {
-      top: clamp(20rem, 48cqw, 23.5rem);
+      top: clamp(23.5rem, 53cqw, 26rem);
+      width: 127px;
+    }
+
+    .fv__sole-label {
+      font-size: var(--fs-xs);
     }
   }
 

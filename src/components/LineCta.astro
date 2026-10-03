@@ -1,0 +1,165 @@
+---
+import { Image, getImage } from 'astro:assets';
+import { LINE_URL } from '../lib/links';
+import bgImg from '../assets/section03-bg.png';
+import decoImg from '../assets/section03-deco.png';
+
+/** 紙吹雪は背景として敷くので、CSS から参照できる URL を作っておく */
+const bg = await getImage({ src: bgImg, format: 'avif', width: 1200 });
+
+/** URL 支給前は # なので、別タブで開かない */
+const isExternal = LINE_URL.startsWith('http');
+---
+
+<section class="line-cta" style={`--line-cta-bg: url('${bg.src}')`}>
+  <div class="line-cta__card">
+    <p class="line-cta__release">
+      <span class="line-cta__date"><span class="line-cta__year en">2026</span><small>年</small>冬頃</span>
+      <span class="line-cta__sale">販売開始</span>
+    </p>
+
+    <p class="line-cta__lead">
+      <Image src={decoImg} alt="" class="line-cta__deco line-cta__deco--left" format="avif" />
+      <span>LINE登録で<strong>最新情報</strong>を配信します</span>
+      <Image src={decoImg} alt="" class="line-cta__deco line-cta__deco--right" format="avif" />
+    </p>
+
+    <a
+      href={LINE_URL}
+      class="line-cta__btn"
+      target={isExternal ? '_blank' : undefined}
+      rel={isExternal ? 'noopener noreferrer' : undefined}
+    >
+      <span><span class="en">LINE</span>登録はこちら</span>
+    </a>
+  </div>
+</section>
+
+<style>
+  /* 位置・サイズはカンプ（390px 幅）の実測を cqw で比率指定する */
+  /* padding を付けると cqw の基準幅が縮むので、余白はカードの margin で取る */
+  .line-cta {
+    container-type: inline-size;
+    display: flow-root;
+    background: var(--line-cta-bg) center / cover no-repeat, #50B295;
+  }
+
+  .line-cta__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: clamp(1rem, 5.2cqw, 2.5rem);
+    padding: clamp(1rem, 5.4cqw, 2.5rem) clamp(1rem, 4.4cqw, 2rem) clamp(1.25rem, 6.4cqw, 3rem);
+    border-radius: clamp(0.625rem, 2.6cqw, 1.25rem);
+    background-color: var(--c-g-000);
+    color: #434343;
+    text-align: center;
+  }
+
+  /* 2026年冬頃 販売開始 */
+  .line-cta__release {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(0.5rem, 2.6cqw, 1.25rem);
+  }
+
+  .line-cta__date {
+    font-size: clamp(1.75rem, 9.8cqw, 4.5rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.04em;
+  }
+
+  .line-cta__year {
+    font-size: 1.05em;
+    font-weight: 800;
+  }
+
+  .line-cta__date small {
+    margin-inline: 0.1em;
+    font-size: 0.6em;
+    font-weight: 400;
+  }
+
+  .line-cta__sale {
+    font-size: clamp(1.375rem, 6.8cqw, 3.25rem);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+  }
+
+  /* LINE登録で最新情報を配信します（左右に飾り） */
+  .line-cta__lead {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    /* 左右の飾りの高さ分を確保する */
+    min-height: clamp(1.5rem, 6.9cqw, 3.25rem);
+    margin-top: clamp(0.75rem, 4.4cqw, 2rem);
+    font-size: clamp(0.875rem, 3.8cqw, 1.75rem);
+    line-height: 1.4;
+    color: var(--c-g-1000);
+    white-space: nowrap;
+  }
+
+  .line-cta__lead strong {
+    font-size: 1.4em;
+    font-weight: 700;
+    color: #FF6161;
+  }
+
+  /* 飾りはカードの左右端に寄せる。元画像は右側用の向き */
+  .line-cta__deco {
+    position: absolute;
+    top: 0;
+    width: clamp(1rem, 4.7cqw, 2.25rem);
+    height: auto;
+  }
+
+  .line-cta__deco--left {
+    left: 0;
+    transform: scaleX(-1);
+  }
+
+  .line-cta__deco--right {
+    right: 0;
+  }
+
+  /* LINE登録はこちら */
+  .line-cta__btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: clamp(3.5rem, 16.2cqw, 7.5rem);
+    margin-top: clamp(1rem, 4.7cqw, 2.25rem);
+    border-radius: clamp(0.625rem, 2.8cqw, 1.25rem);
+    background-color: #00D053;
+    color: var(--c-g-000);
+    font-size: clamp(1.125rem, 5.1cqw, 2.25rem);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .line-cta__btn:hover {
+    opacity: 0.85;
+  }
+
+  /* 右端の三角 */
+  .line-cta__btn::after {
+    content: '';
+    position: absolute;
+    right: clamp(0.75rem, 3cqw, 1.5rem);
+    top: 50%;
+    transform: translateY(-50%);
+    border-style: solid;
+    border-width: 0.3em 0 0.3em 0.48em;
+    border-color: transparent transparent transparent #DBE614;
+  }
+</style>

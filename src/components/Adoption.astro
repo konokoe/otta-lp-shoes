@@ -1,0 +1,119 @@
+---
+import { Image } from 'astro:assets';
+import decoImg from '../assets/section02-deco.png';
+---
+
+<section class="adoption">
+  <Image src={decoImg} alt="" class="adoption__deco adoption__deco--left" format="avif" />
+  <Image src={decoImg} alt="" class="adoption__deco adoption__deco--right" format="avif" />
+
+  <div class="adoption__inner">
+    <p class="adoption__lead">皆様にたくさん<br />ご利用いただいています</p>
+
+    <p class="adoption__main">
+      <span class="adoption__num en">54</span>
+      <span class="adoption__text">
+        <span class="adoption__line"><small>の</small>自治体<small>で</small></span>
+        <span class="adoption__line">導入実績<small>あり</small></span>
+      </span>
+    </p>
+  </div>
+</section>
+
+<style>
+  /* 位置・サイズはカンプ（390px 幅）の実測を cqw で比率指定する */
+  .adoption {
+    container-type: inline-size;
+    position: relative;
+    overflow: hidden;
+    background-color: #FF6161;
+    color: var(--c-g-000);
+  }
+
+  /* 左右のドット */
+  .adoption__deco {
+    position: absolute;
+    top: clamp(0.75rem, 3.6cqw, 1.75rem);
+    width: clamp(2.75rem, 13.7cqw, 6.5rem);
+    height: auto;
+  }
+
+  .adoption__deco--left {
+    left: 1.2cqw;
+  }
+
+  .adoption__deco--right {
+    right: 1.2cqw;
+  }
+
+  .adoption__inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(0.625rem, 3cqw, 1.5rem);
+    padding-block: clamp(1.25rem, 5.6cqw, 2.75rem) clamp(1rem, 4.6cqw, 2.25rem);
+  }
+
+  /* 皆様にたくさん ご利用いただいています（左右にスラッシュ） */
+  .adoption__lead {
+    position: relative;
+    font-size: clamp(1rem, 4.1cqw, 2rem);
+    font-weight: 700;
+    line-height: 1.45;
+    letter-spacing: 0.04em;
+    text-align: center;
+  }
+
+  .adoption__lead::before,
+  .adoption__lead::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 1.5px;
+    height: 2.2em;
+    background-color: currentColor;
+  }
+
+  .adoption__lead::before {
+    left: -1em;
+    transform: translateY(-50%) rotate(-25deg);
+  }
+
+  .adoption__lead::after {
+    right: -1em;
+    transform: translateY(-50%) rotate(25deg);
+  }
+
+  /* 54の自治体で導入実績あり */
+  .adoption__main {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.25rem, 2cqw, 1rem);
+  }
+
+  .adoption__num {
+    font-size: clamp(4rem, 22.6cqw, 11rem);
+    font-weight: 800;
+    line-height: 0.8;
+    letter-spacing: -0.02em;
+    color: #FFF583;
+  }
+
+  .adoption__text {
+    display: flex;
+    flex-direction: column;
+    font-size: clamp(1.5rem, 7.3cqw, 3.5rem);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+  }
+
+  .adoption__line {
+    white-space: nowrap;
+  }
+
+  .adoption__text small {
+    font-size: 0.66em;
+  }
+</style>

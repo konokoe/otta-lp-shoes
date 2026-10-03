@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import FV from '../components/FV.astro';
+import Adoption from '../components/Adoption.astro';
 import PlanDiff from '../components/PlanDiff.astro';
 import Product from '../components/Product.astro';
 import Network from '../components/Network.astro';
@@ -17,7 +18,9 @@ import Footer from '../components/Footer.astro';
 <BaseLayout title="月額0円から始める高齢者見守りサービス｜otta" description="離れて暮らす親をそっと見守る、高齢者向け見守りサービス「otta」。月額0円のプランから始められます。お守り型の端末を持ち歩くだけで、街中の見守りスポットが位置情報を自動で記録。充電不要・操作不要で、スマホも必要ありません。">
   <Header />
   <main>
-    <FV />
+    <FV>
+      <Adoption />
+    </FV>
     <PlanDiff />
     <Points />
     <Network />

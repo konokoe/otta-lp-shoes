@@ -141,6 +141,17 @@ const features = [
     border-radius: 50%;
   }
 
+  /* PC は固定ヘッダーが無い（左のナビに移る）ので、その分上に詰める */
+  @media (min-width: 1400px) {
+    .fv__copy {
+      top: clamp(2.5rem, 7cqw, 3.5rem);
+    }
+
+    .fv__sole {
+      top: clamp(20rem, 48cqw, 23.5rem);
+    }
+  }
+
   /* 特徴の見出し帯 */
   .fv__features-title {
     display: flex;

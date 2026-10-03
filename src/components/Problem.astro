@@ -1,0 +1,90 @@
+---
+import { Image } from 'astro:assets';
+import { en } from '../lib/en';
+import bgImg from '../assets/section04-bg.png';
+---
+
+<section class="problem">
+  <Image
+    src={bgImg}
+    alt=""
+    class="problem__bg"
+    format="avif"
+    widths={[390, 780, 1230]}
+    sizes="(min-width: 768px) 768px, 100vw"
+  />
+
+  <div class="problem__inner">
+    <h2 class="problem__title">認知症の行方不明者は…</h2>
+    <div class="problem__body">
+      <p set:html={en('年間1.8万人超。')} />
+      <p set:html={en('70歳以上では、1日約6件発生しています')} />
+    </div>
+
+    <h2 class="problem__title" set:html={en('GPSは持ち続けてもらえない')} />
+    <div class="problem__body">
+      <!-- SP で語の途中で折り返さないよう、改行してよい位置だけ <wbr> で示す -->
+      <p>充電や管理が負担になり、<wbr />自然と使われなくなるケースが<wbr />多いことが<wbr />自治体の調査で<wbr />明らかになっています。</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* 位置・サイズはカンプ（390px 幅）の実測を cqw で比率指定する */
+  .problem {
+    container-type: inline-size;
+    position: relative;
+    overflow: hidden;
+    background-color: #606062;
+  }
+
+  /* 背景写真（暗く落とした状態で支給） */
+  .problem__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: right top;
+  }
+
+  .problem__inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.5rem, 8.2cqw, 4rem) clamp(1.5rem, 9cqw, 4.25rem) clamp(1.75rem, 8.7cqw, 4.25rem);
+  }
+
+  /* 見出し（濃いグレーの帯） */
+  .problem__title {
+    padding: 0 0.5em;
+    background-color: #434343;
+    color: #FFFCE8;
+    font-size: clamp(1rem, 4.2cqw, 2rem);
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    text-align: center;
+  }
+
+  .problem__body {
+    margin-block: clamp(1rem, 5cqw, 2.5rem) clamp(1.5rem, 7cqw, 3.5rem);
+    color: var(--c-g-000);
+    font-size: var(--fs-m);
+    line-height: 1.8;
+    letter-spacing: 0.04em;
+    text-align: center;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+
+  .problem__body:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (min-width: 769px) {
+    .problem__body {
+      font-size: clamp(1rem, 3.6cqw, 1.5rem);
+    }
+  }
+</style>

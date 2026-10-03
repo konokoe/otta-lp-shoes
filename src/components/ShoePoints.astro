@@ -1,0 +1,186 @@
+---
+import { Image } from 'astro:assets';
+import { en } from '../lib/en';
+import markImg from '../assets/section05-mark.svg';
+import point01Img from '../assets/section05-contents-01.jpg';
+import point02Img from '../assets/section05-contents-02.png';
+import point03Img from '../assets/section05-contents-03.png';
+
+/**
+ * 見守りスニーカーの3つのポイント。
+ * 見出しの html は <em>（赤字）・<mark>（赤字＋マーカー）を含むので set:html で流し込む
+ */
+const points = [
+  {
+    no: '01',
+    title: ['<mark>スニーカー内蔵型</mark>なので置き忘れない！', '必要なのは「靴を履く」たったこれだけ'],
+    body: [
+      '見守り端末は、持ち歩いていないと位置情報を確認できません。しかし、毎日の外出では「ちょっとそこまでだから」と端末を持たずに出かけたり、バッグを替えた際に付け替えを忘れたりすることもあります。',
+      'そこで考えられたのが、外出時に必ず履く「靴」に内蔵する見守り端末です。いつものように靴を履いて出かけるだけで、見守りの準備は完了。端末を持つことを意識する必要がなく、ご本人にもご家族にも負担の少ない見守りを実現します。',
+    ],
+    note: '※見守り端末は靴底に内蔵されているため、取り外しはできません。',
+    img: point01Img,
+    alt: '見守りスニーカーを履いた足元',
+  },
+  {
+    no: '02',
+    title: [`<em>充電不要で最長${en('5')}年</em>ずっと使える！`, 'いざという時の充電切れも心配なし'],
+    body: [
+      'GPS型見守り端末や紛失防止タグは充電や電池交換の必要があり、カバンから外したまま付け忘れるというデメリットがありました。また、帰宅が遅いときや迷子になったなどの非常時に限って充電が切れているというケースもあります。ottaの見守りスニーカーは充電不要。何もしなくても、最長で5年間毎日使えます。',
+    ],
+    img: point02Img,
+    alt: '見守りスニーカーの構造図。インソール、見守りセンサー（ソールのかかと部分に内蔵）、ミッドソール、アウトソール。開発中のイメージ図で、実際の商品とは異なります',
+  },
+  {
+    no: '03',
+    title: [`雨に濡れて水没しても、<em>水洗いしても${en('OK')}！</em>`, '汚れてもジャブジャブ洗えます'],
+    body: [
+      '靴に内蔵された見守り端末で気になるのが防水性。雨の時はどうなるの？汚れたら洗濯できるの？ご安心ください。IP67相当の防水、防塵仕様で、さらにセンサーは完全に靴に封入されているため水に濡れてもまったく問題ありません。歯ブラシや柔らかいブラシを使用して中性洗剤で手洗いすることで、きれいな状態を長く保てます。インソールも取り外して洗えるので衛生的。毎日使うものだから、水洗いでいつでも清潔に。',
+    ],
+    img: point03Img,
+    alt: '見守りスニーカーをブラシで水洗いしている様子',
+  },
+];
+---
+
+<section class="shoe-points">
+  {points.map(point => (
+    <article class="shoe-point">
+      <div class="shoe-point__head">
+        <p class="shoe-point__mark">
+          <Image src={markImg} alt="" class="shoe-point__mark-bg" />
+          <span class="shoe-point__mark-label en">point</span>
+          <span class="shoe-point__mark-no en">{point.no}</span>
+        </p>
+        <h3 class="shoe-point__title">
+          {point.title.map(line => (
+            <span class="shoe-point__title-line" set:html={line} />
+          ))}
+        </h3>
+      </div>
+
+      <div class="shoe-point__body">
+        {point.body.map(text => (
+          <p set:html={en(text)} />
+        ))}
+        {point.note && <p class="shoe-point__note">{point.note}</p>}
+      </div>
+
+      <Image
+        src={point.img}
+        alt={point.alt}
+        class="shoe-point__img"
+        format="avif"
+        widths={[390, 780, 1230]}
+        sizes="(min-width: 768px) 768px, 100vw"
+      />
+    </article>
+  ))}
+</section>
+
+<style>
+  /* 位置・サイズはカンプ（390px 幅）の実測を cqw で比率指定する */
+  .shoe-points {
+    container-type: inline-size;
+    background-color: var(--c-g-000);
+  }
+
+  .shoe-point {
+    padding-top: var(--section-pt);
+  }
+
+  /* マーク＋見出し */
+  .shoe-point__head {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.25rem, 1.8cqw, 1rem);
+    padding-inline: clamp(0.75rem, 4.9cqw, 2.25rem) clamp(0.5rem, 3cqw, 1.5rem);
+  }
+
+  .shoe-point__mark {
+    position: relative;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: clamp(4rem, 19.1cqw, 9rem);
+    aspect-ratio: 235 / 239;
+    color: #FFFBE8;
+    line-height: 1;
+  }
+
+  .shoe-point__mark-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .shoe-point__mark-label,
+  .shoe-point__mark-no {
+    position: relative;
+    font-weight: 700;
+  }
+
+  .shoe-point__mark-label {
+    font-size: clamp(0.5625rem, 2.5cqw, 1.125rem);
+  }
+
+  .shoe-point__mark-no {
+    margin-top: 0.05em;
+    font-size: clamp(1.5rem, 7.2cqw, 3.5rem);
+  }
+
+  .shoe-point__title {
+    min-width: 0;
+    font-size: clamp(0.8125rem, 3.7cqw, 1.75rem);
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0.03em;
+    color: var(--c-text);
+  }
+
+  /* 改行位置はカンプ通りに固定する */
+  .shoe-point__title-line {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .shoe-point__title :global(em),
+  .shoe-point__title :global(mark) {
+    font-style: normal;
+    color: #FF6161;
+  }
+
+  .shoe-point__title :global(mark) {
+    background-color: #FFFBE8;
+  }
+
+  /* 本文 */
+  .shoe-point__body {
+    display: flex;
+    flex-direction: column;
+    margin-top: var(--content-gap);
+    padding-inline: clamp(1.25rem, 7.2cqw, 3.5rem);
+    font-size: var(--fs-m);
+    line-height: 1.9;
+    letter-spacing: 0.05em;
+    color: var(--c-text);
+    /* 最終行に1〜2文字だけ残るのを避ける */
+    text-wrap: pretty;
+  }
+
+  .shoe-point__note {
+    margin-top: 0.75em;
+    font-size: var(--fs-xs);
+    color: #424242;
+  }
+
+  .shoe-point__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: var(--content-gap);
+  }
+</style>

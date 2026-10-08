@@ -28,27 +28,25 @@ const features = [
       class="fv__main"
       format="avif"
       loading="eager"
-      widths={[390, 780, 1170]}
+      widths={[390, 780]}
       sizes="(min-width: 768px) 768px, 100vw"
     />
 
     <div class="fv__copy">
-      <h1 class="fv__title">高齢者の「歩く」を、<br />やさしく見守る。</h1>
-      <p class="fv__lead">軽やかで優しい履き心地。<br />散歩や軽い運動など、<br />毎日の外出をもっと楽しく。</p>
-
-      <figure class="fv__sole">
-        <figcaption class="fv__sole-label">ハチの巣状のソール</figcaption>
-        <Image
-          src={subImg}
-          alt=""
-          class="fv__sole-img"
-          format="avif"
-          loading="eager"
-          widths={[127, 254, 381, 500]}
-          sizes="(min-width: 768px) 250px, 33vw"
-        />
-      </figure>
+      <h1 class="fv__title">歩く安心も<br />見守る安心も、<br />この一足に。</h1>
+      <p class="fv__lead"><Fragment set:html={en('otta.aの見守り昨日を搭載した')} /><br />やさしい履き心地の<br />スニーカーです。</p>
     </div>
+
+    <!-- 見守りアプリの画面（「見守り機能を靴に搭載」の文字は画像に含まれる） -->
+    <Image
+      src={subImg}
+      alt="見守り機能を靴に搭載。見守りアプリの地図で位置を確認できます"
+      class="fv__sub"
+      format="avif"
+      loading="eager"
+      widths={[160, 320, 483]}
+      sizes="(min-width: 768px) 313px, 41vw"
+    />
   </div>
 
   <!-- クッションスニーカーの特徴 -->
@@ -93,7 +91,7 @@ const features = [
   /* コピー */
   .fv__copy {
     position: absolute;
-    top: clamp(4.5rem, 21.5cqw, 10.5rem);
+    top: clamp(4.5rem, 30cqw, 14.5rem);
     left: clamp(1rem, 6.2cqw, 3rem);
     color: var(--c-text);
   }
@@ -101,45 +99,27 @@ const features = [
   .fv__title {
     font-size: clamp(1.375rem, 6.4cqw, 3rem);
     font-weight: 700;
-    line-height: 1.45;
+    line-height: 1.54;
     letter-spacing: 0.02em;
   }
 
   .fv__lead {
-    margin-top: clamp(0.75rem, 3.6cqw, 1.75rem);
-    /* カンプは約 14px だが、本文の下限 --fs-m に合わせる */
-    font-size: clamp(1rem, 4.1cqw, 1.5rem);
+    margin-top: clamp(0.5rem, 2.6cqw, 1.25rem);
+    /* 本文の下限は --fs-m だが、16px だと右のアプリ画面に重なるため
+       カンプ（約 13px）に近い 14px に留める */
+    font-size: clamp(0.875rem, 3.6cqw, 1.5rem);
     font-weight: 500;
-    line-height: 1.75;
+    line-height: 1.8;
     letter-spacing: 0.02em;
   }
 
-  /* ハチの巣状のソール（説明文の下に続けて置く） */
-  .fv__sole {
-    /* SP は靴のつま先に重ならない大きさに抑える */
-    width: clamp(7rem, 29cqw, 14rem);
-    margin: clamp(1rem, 4.1cqw, 2rem) 0 0;
-  }
-
-  .fv__sole-label {
-    position: relative;
-    z-index: 1;
-    width: max-content;
-    padding: 0.35em 1.1em;
-    border-radius: 9999px;
-    background-color: var(--c-dark);
-    color: var(--c-g-000);
-    font-size: clamp(0.75rem, 3.2cqw, 1.375rem);
-    font-weight: 500;
-    line-height: 1.5;
-  }
-
-  .fv__sole-img {
-    display: block;
-    width: 100%;
+  /* 見守りアプリの画面（右上） */
+  .fv__sub {
+    position: absolute;
+    top: clamp(4.5rem, 32cqw, 15.5rem);
+    left: 58.5%;
+    width: 40.8%;
     height: auto;
-    margin-top: -0.75em;
-    border-radius: 50%;
   }
 
   /* PC は固定ヘッダーが無い（左のナビに移る）ので、その分上に詰める */
@@ -148,15 +128,14 @@ const features = [
       top: clamp(5rem, 12cqw, 6rem);
     }
 
-    /* PC は縦に余裕があるので、余白・行間・ソールを広めに取る */
-    .fv__lead {
-      margin-top: clamp(0.75rem, 4cqw, 2rem);
-      line-height: 1.85;
+    .fv__sub {
+      top: clamp(4.5rem, 11cqw, 5.5rem);
     }
 
-    .fv__sole {
-      width: clamp(7.5rem, 32.6cqw, 15.5rem);
-      margin-top: clamp(1rem, 5.6cqw, 2.75rem);
+    /* PC は縦に余裕があるので、余白・行間を広めに取る */
+    .fv__lead {
+      margin-top: clamp(0.75rem, 3.6cqw, 1.75rem);
+      line-height: 1.85;
     }
   }
 

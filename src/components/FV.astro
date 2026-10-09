@@ -52,15 +52,17 @@ const features = [
 
   <!-- 見守り機能の紹介（靴の紹介より先に「見守りの商品」であることを伝える） -->
   <div class="fv__intro">
-    <h2 class="fv__intro-title">履くだけで、居場所がわかる。</h2>
-    <p class="fv__intro-text" set:html={en('靴底に見守り端末を内蔵した、ottaの見守りスニーカー。履いて歩くだけで、立ち寄った場所の記録がご家族のスマホに届きます。端末を持ち歩く必要も、充電する手間もありません。毎日の「いってきます」が、そのまま見守りになります。')} />
+    <div class="fv__intro-body">
+      <h2 class="fv__intro-title">履くだけで、居場所がわかる。</h2>
+      <p class="fv__intro-text" set:html={en('靴底に見守り端末を内蔵した、ottaの見守りスニーカー。履いて歩くだけで、立ち寄った場所の記録がご家族のスマホに届きます。端末を持ち歩く必要も、充電する手間もありません。毎日の「いってきます」が、そのまま見守りになります。')} />
+    </div>
     <Image
       src={appImg}
       alt="見守りアプリの画面を手に持ったスマホ。地図上に立ち寄った場所と時刻が表示されています"
       class="fv__intro-img"
       format="avif"
       widths={[202, 404, 422]}
-      sizes="(min-width: 768px) 288px, 52vw"
+      sizes="(min-width: 769px) 262px, 52vw"
     />
   </div>
 
@@ -181,9 +183,36 @@ const features = [
   .fv__intro-img {
     align-self: center;
     /* カンプ実測 202px / 390px 幅。cqw はセクション全幅基準なので余白に左右されない */
-    width: min(51.8cqw, 18rem);
+    width: 51.8cqw;
     height: auto;
     margin-top: var(--content-gap);
+  }
+
+  /* 列が広い幅では、文章を左・スマホを右に並べる */
+  @media (min-width: 769px) {
+    .fv__intro {
+      flex-direction: row;
+      align-items: center;
+      gap: clamp(1.5rem, 5cqw, 3rem);
+    }
+
+    /* 2カラムだと文章の幅が狭くなるので、見出しが1行に収まる大きさにする */
+    .fv__intro-title {
+      font-size: clamp(1.375rem, 3.2cqw, 1.625rem);
+    }
+
+    .fv__intro-body {
+      flex: 1;
+      /* 画像は下端を帯に付けるので、その分だけ文章を上に寄せる */
+      padding-bottom: var(--content-gap);
+    }
+
+    .fv__intro-img {
+      flex-shrink: 0;
+      align-self: flex-end;
+      width: 34cqw;
+      margin-top: 0;
+    }
   }
 
   /* 特徴の見出し帯 */

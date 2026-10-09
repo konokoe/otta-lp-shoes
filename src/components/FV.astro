@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import { en } from '../lib/en';
 import mainImg from '../assets/fv-main.png';
 import subImg from '../assets/fv-sub.png';
+import appImg from '../assets/fv_img.png';
 import item01 from '../assets/fv-items-01.png';
 import item02 from '../assets/fv-items-02.png';
 import item03 from '../assets/fv-items-03.png';
@@ -46,6 +47,20 @@ const features = [
       loading="eager"
       widths={[160, 320, 483]}
       sizes="(min-width: 768px) 313px, 41vw"
+    />
+  </div>
+
+  <!-- 見守り機能の紹介（靴の紹介より先に「見守りの商品」であることを伝える） -->
+  <div class="fv__intro">
+    <h2 class="fv__intro-title">履くだけで、居場所がわかる。</h2>
+    <p class="fv__intro-text" set:html={en('靴底に見守り端末を内蔵した、ottaの見守りスニーカー。履いて歩くだけで、立ち寄った場所の記録がご家族のスマホに届きます。端末を持ち歩く必要も、充電する手間もありません。毎日の「いってきます」が、そのまま見守りになります。')} />
+    <Image
+      src={appImg}
+      alt="見守りアプリの画面を手に持ったスマホ。地図上に立ち寄った場所と時刻が表示されています"
+      class="fv__intro-img"
+      format="avif"
+      widths={[202, 404, 422]}
+      sizes="(min-width: 768px) 288px, 52vw"
     />
   </div>
 
@@ -137,6 +152,38 @@ const features = [
       margin-top: clamp(0.75rem, 3.6cqw, 1.75rem);
       line-height: 1.85;
     }
+  }
+
+  /* 見守り機能の紹介 */
+  .fv__intro {
+    display: flex;
+    flex-direction: column;
+    padding: var(--section-pt) clamp(1rem, 6.2cqw, 3rem) 0;
+    color: var(--c-text);
+  }
+
+  .fv__intro-title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+  }
+
+  .fv__intro-text {
+    margin-top: var(--content-gap);
+    font-size: var(--fs-m);
+    line-height: 1.85;
+    letter-spacing: 0.02em;
+    text-wrap: pretty;
+  }
+
+  /* スマホの画像は下の紺の帯にぴったり付ける */
+  .fv__intro-img {
+    align-self: center;
+    /* カンプ実測 202px / 390px 幅。cqw はセクション全幅基準なので余白に左右されない */
+    width: min(51.8cqw, 18rem);
+    height: auto;
+    margin-top: var(--content-gap);
   }
 
   /* 特徴の見出し帯 */

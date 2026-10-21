@@ -1,15 +1,18 @@
 ---
 import { Image, getImage } from 'astro:assets';
 import { LINE_URL } from '../lib/links';
+import type { CtaLocation } from '../lib/links';
 import bgImg from '../assets/section03-bg.png';
 import decoImg from '../assets/section03-deco.png';
 
 interface Props {
   /** ナビのリンク先にする場合のみ指定（ページ内で重複させない） */
   id?: string;
+  /** GA4 の cta_location に入る設置位置 */
+  location: CtaLocation;
 }
 
-const { id } = Astro.props;
+const { id, location } = Astro.props;
 
 /** 紙吹雪は背景として敷くので、CSS から参照できる URL を作っておく */
 const bg = await getImage({ src: bgImg, format: 'avif', width: 1200 });
@@ -33,7 +36,9 @@ const isExternal = LINE_URL.startsWith('http');
 
     <a
       href={LINE_URL}
-      class="line-cta__btn"
+      class="line-cta__btn js-cta"
+      data-cta-shop="line"
+      data-cta-location={location}
       target={isExternal ? '_blank' : undefined}
       rel={isExternal ? 'noopener noreferrer' : undefined}
     >

@@ -1,4 +1,4 @@
-/** GA4 の cta_location に入る設置位置 */
+/** GA4 の cta_location に入る設置位置（GTM がボタンの data-cta-location から読む） */
 export type CtaLocation = 'fv' | 'mid' | 'bottom' | 'nav' | 'menu';
 
 /** 購入導線の外部リンク（公式ショップ / Amazon） */

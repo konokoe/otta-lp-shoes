@@ -12,8 +12,8 @@
 
 ## 公開情報
 
-- **公開URL:** https://www.otta.me/lp/shoes/
-- **ステージング:** https://otta-shoes.konokoe.design/lp/shoes/
+- **公開URL:** https://www.otta.me/lp/senior-shoes/
+- **ステージング:** https://otta-shoes.konokoe.design/lp/senior-shoes/
 - **リポジトリ:** git@github.com:konokoe/otta-lp-shoes.git
 
 ## Astro 設定
@@ -21,7 +21,7 @@
 ```js
 // astro.config.mjs
 site: 'https://www.otta.me'
-base: '/lp/shoes'
+base: '/lp/senior-shoes'
 ```
 
 ## ターゲット

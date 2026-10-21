@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://www.otta.me',
-  base: '/lp/shoes',
+  base: '/lp/senior-shoes',
   devToolbar: { enabled: false },
   vite: {
     plugins: [tailwindcss()],
